@@ -9,17 +9,16 @@
 
 class GameObject {
 public:
-    // using namespace damage_types;
-    // using namespace effects;
-
-    using Resistances = std::unordered_map<damage_types::DamageType, int>;
+    using Resistances = std::unordered_map<damage_types::DamageType, double>;
 
     template <class... StatusEffects>
     using StatusEffects = std::tuple<std::optional<StatusEffects>...>;
 public:
-    template <class DamageType>
+    template <damage_types::DamageType type>
     void take_damage(int damage) {
-
+        // Look up resistance, and decrease damage by that amount
+        damage *= resistances_[type];
+        hp_ -= damage;
     }
 
     template <class StatusEffect>

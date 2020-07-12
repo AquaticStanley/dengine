@@ -1,1 +1,14 @@
 Possibly have potency change based on position, i.e. in the "eye" of the storm, potency is quartered or something like that
+
+Every fight has a base potency for all elements - a level 20 fight should have fire surfaces that scale to threaten level 20 characters
+
+status effect ideas:
+magnetism
+burning
+poison
+blind
+
+
+some status effects need context of the world. therefore, two rounds will be done per turn:
+-Individual status effects on that entity's turn
+-World-wide status effects that loop over entities and apply them with the world context (magnetism needs to work like this)
