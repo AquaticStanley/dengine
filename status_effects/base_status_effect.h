@@ -1,12 +1,11 @@
 #pragma once
 
-#include "../GameObject.h"
 #include <memory>
 #include <cstdlib>
 
-namespace effects {
-    
 class GameObject;
+
+namespace effects {
 
 template <class Derived>
 class BaseStatusEffect {
