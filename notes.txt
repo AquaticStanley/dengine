@@ -1,0 +1,1 @@
+Possibly have potency change based on position, i.e. in the "eye" of the storm, potency is quartered or something like that

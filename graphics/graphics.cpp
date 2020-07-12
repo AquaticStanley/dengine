@@ -1,4 +1,4 @@
-#include "Graphics.h"
+#include "graphics.h"
 
 void Graphics::draw(sf::Vector2f position, sf::Vector2f hitbox, sf::Color color) {
     sf::RectangleShape rectangle(hitbox);
