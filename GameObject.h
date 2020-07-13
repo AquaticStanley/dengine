@@ -6,6 +6,7 @@
 #include <type_traits>
 #include "status_effects/status_effects.h"
 #include "damage_types.h"
+#include <iostream>
 
 class GameObject {
 public:
@@ -21,6 +22,10 @@ public:
     void set_status(StatusEffect effect);
 
     void trigger_status_effects();
+
+private:
+    template <class StatusEffect>
+    void trigger_status_effect();
 
 private:
     StatusEffects<effects::Burning, effects::Wet> status_effects_;

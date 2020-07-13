@@ -2,6 +2,7 @@
 
 #include <memory>
 #include <cstdlib>
+#include <iostream>
 
 class GameObject;
 
@@ -10,16 +11,17 @@ namespace effects {
 template <class Derived>
 class BaseStatusEffect {
 public:
-    ~BaseStatusEffect() {}
-    void apply_status_effect(GameObject& object) {
-        static_cast<Derived*>(this)->apply_status_effect(object);
-    }
+    BaseStatusEffect(uint16_t duration, int potency, int potency_change_rate)
+    : duration_(duration)
+    , potency_(potency)
+    , potency_change_rate_(potency_change_rate)
+    {}
 
-    void tick(GameObject& object) {
-        static_cast<Derived*>(this)->tick(object);
-        duration_ -= 1;
-        potency_ += potency_change_rate_;
-    }
+    ~BaseStatusEffect() {}
+
+    void apply_status_effect(GameObject& object);
+
+    void tick(GameObject& object);
 
     // This determines whether this instance of an effect should override another
     bool operator >(const BaseStatusEffect<Derived>& rhs) {
@@ -53,3 +55,5 @@ protected:
 };
 
 }
+
+#include "base_status_effect.hpp"

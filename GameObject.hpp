@@ -35,8 +35,10 @@ void GameObject::set_status(StatusEffect effect) {
     }
 }
 
-void GameObject::trigger_status_effects() {
-    std::apply([this](auto& ...x) {
-        (..., x->tick(*this));
-    }, status_effects_);
+template <class StatusEffect>
+void GameObject::trigger_status_effect() {
+    auto& status_effect = std::get<std::optional<StatusEffect>>(status_effects_);
+    if(status_effect.has_value()) {
+        static_cast<effects::BaseStatusEffect<StatusEffect>>(*status_effect).tick(*this);
+    }
 }

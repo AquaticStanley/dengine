@@ -10,7 +10,7 @@ CXX = /usr/bin/g++
 CXXFLAGS = -g -Wall -W -pedantic-errors -std=c++17
 
 SOURCES = $(wildcard *.cpp) $(wildcard */*.cpp) $(wildcard */*/*.cpp)
-HEADERS = $(wildcard *.h) $(wildcard */*.h)
+HEADERS = $(wildcard *.h) $(wildcard */*.h) $(wildcard *.hpp)
 
 OBJECTS = $(SOURCES:%.cpp=%.o)
 SFMLFLAGS = -lsfml-graphics -lsfml-window -lsfml-system
