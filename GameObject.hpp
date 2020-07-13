@@ -36,9 +36,7 @@ void GameObject::set_status(StatusEffect effect) {
 }
 
 void GameObject::trigger_status_effects() {
-    detail::for_each_in_tuple(status_effects_, [this](auto& status_effect) {
-        if(status_effect.has_value()) {
-            status_effect->tick(*this);
-        }
-    });
+    std::apply([this](auto& ...x) {
+        (..., x->tick(*this));
+    }, status_effects_);
 }

@@ -1,6 +1,6 @@
 #include <iostream>
 #include "surfaces/fire.h"
 
-int main(int argc, char* argv[]) {
+int main() {
 	std::cout << "Test" << std::endl;
 }
