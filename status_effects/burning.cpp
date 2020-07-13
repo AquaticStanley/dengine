@@ -3,13 +3,13 @@
 
 namespace effects {
 
-void Burning::apply_status_effect(const std::unique_ptr<GameObject> object) {
-    object->set_status<Burning>(*this);
+void Burning::apply_status_effect(GameObject& object) {
+    object.set_status<Burning>(*this);
 }
 
-void Burning::tick(const std::unique_ptr<GameObject> object) {
+void Burning::tick(GameObject& object) {
     // Apply burning damage
-    object->take_damage<damage_types::DamageType::Fire>(potency_);
+    object.take_damage<damage_types::DamageType::Fire>(potency_);
 }
 
 }

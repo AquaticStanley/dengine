@@ -21,5 +21,24 @@ void GameObject::set_status(StatusEffect effect) {
                 burning = effect;
             }
         }
+    } else if constexpr(std::is_same<StatusEffect, effects::Wet>::value) {
+        // If burning, set not burning
+        if(auto& burning = std::get<std::optional<effects::Burning>>(status_effects_)) {
+            burning.reset();
+        }
+        else {
+            auto& wet = std::get<std::optional<effects::Wet>>(status_effects_);
+            if(!wet || (*wet) < effect) {
+                wet = effect;
+            }
+        }
     }
+}
+
+void GameObject::trigger_status_effects() {
+    detail::for_each_in_tuple(status_effects_, [this](auto& status_effect) {
+        if(status_effect.has_value()) {
+            status_effect->tick(*this);
+        }
+    });
 }

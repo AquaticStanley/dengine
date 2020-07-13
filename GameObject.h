@@ -4,6 +4,7 @@
 #include <tuple>
 #include <unordered_map>
 #include <type_traits>
+#include "tmp_util.h"
 #include "status_effects/status_effects.h"
 #include "damage_types.h"
 
@@ -19,6 +20,8 @@ public:
 
     template <class StatusEffect>
     void set_status(StatusEffect effect);
+
+    void trigger_status_effects();
 
 private:
     StatusEffects<effects::Burning, effects::Wet> status_effects_;

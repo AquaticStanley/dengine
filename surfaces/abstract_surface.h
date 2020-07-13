@@ -1,14 +1,15 @@
 #pragma once
 
-#include "../GameObject.h"
 #include <memory>
+
+class GameObject;
 
 namespace surfaces {
 
 class AbstractSurface {
 public:
     virtual ~AbstractSurface() {}
-    virtual void apply_surface_effect(const std::unique_ptr<GameObject> object) = 0;  // Should set damage/healing and effect on object
+    virtual void apply_surface_effect(GameObject& object) = 0;  // Should set damage/healing and effect on object
 protected:
     uint16_t size_;                 // How many tiles away from the originating tile this surface takes up
     uint16_t duration_;             // How many turns this surface lasts

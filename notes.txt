@@ -7,8 +7,13 @@ magnetism
 burning
 poison
 blind
+chilled
+frozen
+numb
 
 
 some status effects need context of the world. therefore, two rounds will be done per turn:
 -Individual status effects on that entity's turn
 -World-wide status effects that loop over entities and apply them with the world context (magnetism needs to work like this)
+
+Possibly put in a clause where the potency of a fire status effect is decreased by the potency of a water ability
