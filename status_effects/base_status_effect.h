@@ -21,9 +21,12 @@ public:
         potency_ += potency_change_rate_;
     }
 
+    // This determines whether this instance of an effect should override another
     bool operator >(const BaseStatusEffect<Derived>& rhs) {
-        if(abs(potency_ * duration_) > abs(rhs.potency_ * rhs.duration_)) {
-            return true;
+        if(potency_ == 0 && rhs.potency_ == 0) {
+            return duration_ > rhs.duration_;
+        } else {
+            return abs(potency_ * duration_) > abs(rhs.potency_ * rhs.duration_);
         }
     }
 
@@ -32,7 +35,11 @@ public:
     }
 
     bool operator ==(const BaseStatusEffect<Derived>& rhs) {
-        return abs(potency_ * duration_) == abs(rhs.potency_ * rhs.duration_);
+        if(potency_ == 0 && rhs.potency_ == 0) {
+            return duration_ == rhs.duration_;
+        } else {
+            return abs(potency_ * duration_) == abs(rhs.potency_ * rhs.duration_);
+        }
     }
 
     bool operator !=(const BaseStatusEffect<Derived>& rhs) {
