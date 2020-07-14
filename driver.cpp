@@ -3,6 +3,7 @@
 #include "surfaces/normal.h"
 #include "GameObject.h"
 #include "status_effects/status_effects.h"
+#include "map/tile.h"
 
 int main() {
 	std::cout << "Test" << std::endl;
