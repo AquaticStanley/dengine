@@ -19,6 +19,7 @@ public:
 
     ~BaseStatusEffect() {}
 
+public:
     void apply_status_effect(GameObject& object);
 
     void tick(GameObject& object);
@@ -47,6 +48,11 @@ public:
     bool operator !=(const BaseStatusEffect<Derived>& rhs) {
         return !(this->operator==(rhs));
     }
+
+    uint16_t duration() const { return duration_; }
+public:
+    // Debugging
+    int potency() const { return potency_; }
 
 protected:
     uint16_t duration_;

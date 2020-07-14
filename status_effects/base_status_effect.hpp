@@ -9,7 +9,6 @@ void BaseStatusEffect<Derived>::apply_status_effect(GameObject& object) {
 
 template <class Derived>
 void BaseStatusEffect<Derived>::tick(GameObject& object) {
-    std::cout << "test" << std::endl;
     static_cast<Derived*>(this)->tick(object);
     duration_ -= 1;
     potency_ += potency_change_rate_;

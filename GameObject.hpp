@@ -39,6 +39,9 @@ template <class StatusEffect>
 void GameObject::trigger_status_effect() {
     auto& status_effect = std::get<std::optional<StatusEffect>>(status_effects_);
     if(status_effect.has_value()) {
-        static_cast<effects::BaseStatusEffect<StatusEffect>>(*status_effect).tick(*this);
+        static_cast<effects::BaseStatusEffect<StatusEffect>&>(*status_effect).tick(*this);
+        if(status_effect->duration() == 0) {
+            status_effect.reset();
+        }
     }
 }

@@ -1,6 +1,5 @@
 #include "../GameObject.h"
 #include "burning.h"
-#include <iostream>
 
 namespace effects {
 

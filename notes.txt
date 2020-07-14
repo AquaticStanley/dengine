@@ -10,6 +10,9 @@ blind
 chilled
 frozen
 numb
+mad
+stunned (electricity)
+metal
 
 
 some status effects need context of the world. therefore, two rounds will be done per turn:
