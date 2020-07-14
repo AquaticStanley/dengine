@@ -24,7 +24,6 @@ public:
     template <damage_types::DamageType type>
     void take_damage(int damage);
 
-    // Interactions between status effects should go here.
     template <class StatusEffect>
     void set_status(StatusEffect effect);
 

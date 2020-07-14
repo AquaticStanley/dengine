@@ -1,5 +1,6 @@
 #include <iostream>
 #include "surfaces/fire.h"
+#include "surfaces/normal.h"
 #include "GameObject.h"
 #include "status_effects/status_effects.h"
 
