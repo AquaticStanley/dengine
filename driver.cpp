@@ -4,6 +4,7 @@
 #include "GameObject.h"
 #include "status_effects/status_effects.h"
 #include "map/tile.h"
+#include "abilities/abstract_ability.h"
 
 int main() {
 	std::cout << "Test" << std::endl;

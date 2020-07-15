@@ -62,6 +62,10 @@ public:
         }
     }
 
+    observer_ptr<GameObject> get_contained_object() {
+        return object_;
+    }
+
 private:
     observer_ptr<GameObject> object_;
     std::unique_ptr<surfaces::AbstractSurface> surface_;

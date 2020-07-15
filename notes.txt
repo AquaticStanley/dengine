@@ -20,3 +20,5 @@ some status effects need context of the world. therefore, two rounds will be don
 -World-wide status effects that loop over entities and apply them with the world context (magnetism needs to work like this)
 
 Possibly put in a clause where the potency of a fire status effect is decreased by the potency of a water ability
+
+Possibly have a collide function in each derived surface that returns a pointer to the abstract surface that should reign supreme
