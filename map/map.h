@@ -28,7 +28,7 @@ public:
     }
 
     bool tile_exists(const sf::Vector2i& coordinates) const {
-        return coordinates.x < 0 || coordinates.x >= width_ || coordinates.y < 0 || coordinates.y >= length_;
+        return coordinates.x >= 0 && coordinates.x < width_ && coordinates.y >= 0 && coordinates.y < length_;
     }
 
     Tile& get_tile(const sf::Vector2i& coordinates) {

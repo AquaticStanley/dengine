@@ -46,15 +46,16 @@ public:
             default:
                 break;
             }
+            break;
 
         case surfaces::SurfaceType::Water:
             switch(rhs_surface_type) {
-                case surfaces::SurfaceType::Fire:
-                    surface_ = std::make_unique<surfaces::NormalSurface>();
-                    break;
+            case surfaces::SurfaceType::Fire:
+                surface_ = std::make_unique<surfaces::NormalSurface>();
+                break;
 
-                default:
-                    break;
+            default:
+                break;
             }
             break;
 
@@ -67,19 +68,19 @@ public:
         return object_;
     }
 
-    char to_str() const {
+    std::string to_str() const {
         switch(surface_->surface_type()) {
         case surfaces::SurfaceType::Water:
-            return 'W';
+            return "W";
             break;
         case surfaces::SurfaceType::Fire:
-            return 'F';
+            return "F";
             break;
         case surfaces::SurfaceType::Normal:
-            return 'X';
+            return ".";
             break;
         default:
-            return '%';
+            return "%";
             break;
         }
     }

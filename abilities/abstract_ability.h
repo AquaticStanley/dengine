@@ -23,6 +23,14 @@ public:
 
     using pattern_set = std::unordered_set<sf::Vector2i, hash_vector>;
 public:
+    AbstractAbility(int potency, int min_range, int max_range, int size, int cooldown)
+    : potency_(potency)
+    , min_range_(min_range)
+    , max_range_(max_range)
+    , size_(size)
+    , cooldown_(cooldown)
+    {}
+
     virtual ~AbstractAbility() {}
 
     virtual void apply_ability_effect(map::Map& map, const sf::Vector2i& origin, const sf::Vector2i& destination) = 0;
@@ -32,21 +40,26 @@ public:
         if(map.tile_exists(origin)) {
             coordinates.emplace(origin);
             while(size > 0) {
+                pattern_set coordinates_to_insert;
                 for(auto& coordinate : coordinates) {
                     // Get tiles on all sides of this
                     if(auto up_coord = coordinate + sf::Vector2i{0, 1}; map.tile_exists(up_coord)) {
-                        coordinates.emplace(up_coord);
+                        coordinates_to_insert.emplace(up_coord);
                     }
                     if(auto right_coord = coordinate + sf::Vector2i{1, 0}; map.tile_exists(right_coord)) {
-                        coordinates.emplace(right_coord);
+                        coordinates_to_insert.emplace(right_coord);
                     }
                     if(auto down_coord = coordinate + sf::Vector2i{0, -1}; map.tile_exists(down_coord)) {
-                        coordinates.emplace(down_coord);
+                        coordinates_to_insert.emplace(down_coord);
                     }
                     if(auto left_coord = coordinate + sf::Vector2i{-1, 0}; map.tile_exists(left_coord)) {
-                        coordinates.emplace(left_coord);
+                        coordinates_to_insert.emplace(left_coord);
                     }
                 }
+                for(auto& coordinate : coordinates_to_insert) {
+                    coordinates.emplace(coordinate);
+                }
+                --size;
             }
         }
         return coordinates;
