@@ -11,7 +11,8 @@ public:
     template <class T>
     using observer_ptr = T*;
 public:
-    void collide_with_surface(std::unique_ptr<surfaces::AbstractSurface>& rhs) {
+    Tile() : surface_(std::make_unique<surfaces::NormalSurface>()) {}
+    void collide_with_surface(std::unique_ptr<surfaces::AbstractSurface> rhs) {
         auto this_surface_type = surface_->surface_type();
         auto rhs_surface_type = rhs->surface_type();
 
@@ -64,6 +65,23 @@ public:
 
     observer_ptr<GameObject> get_contained_object() {
         return object_;
+    }
+
+    char to_str() const {
+        switch(surface_->surface_type()) {
+        case surfaces::SurfaceType::Water:
+            return 'W';
+            break;
+        case surfaces::SurfaceType::Fire:
+            return 'F';
+            break;
+        case surfaces::SurfaceType::Normal:
+            return 'X';
+            break;
+        default:
+            return '%';
+            break;
+        }
     }
 
 private:

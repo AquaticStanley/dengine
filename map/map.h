@@ -35,6 +35,17 @@ public:
         return map_[coordinates.x + (coordinates.y * width_)];
     }
 
+    std::string to_str() {
+        std::string s = "";
+        for(int len = length_- 1; len >= 0; --len) {
+            for(int wid = 0; wid < width_; ++wid) {
+                s += get_tile(sf::Vector2i{wid, len}).to_str() + " ";
+            }
+            s += "\n";
+        }
+        return s;
+    }
+
 private:
     int width_;
     int length_;

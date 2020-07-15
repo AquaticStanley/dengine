@@ -6,7 +6,7 @@
 
 .PHONY: all clean
 
-CXX = /usr/bin/g++
+CXX = /usr/bin/g++-9
 CXXFLAGS = -g -Wall -W -pedantic-errors -std=c++17
 
 SOURCES = $(wildcard *.cpp) $(wildcard */*.cpp) $(wildcard */*/*.cpp)
