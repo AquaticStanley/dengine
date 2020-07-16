@@ -34,7 +34,7 @@ public:
     }
 
     bool operator <(const BaseStatusEffect<Derived>& rhs) {
-        return !(this->operator<(rhs));
+        return !(this->operator>(rhs));
     }
 
     bool operator ==(const BaseStatusEffect<Derived>& rhs) {
