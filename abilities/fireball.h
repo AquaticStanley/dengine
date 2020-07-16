@@ -18,10 +18,12 @@ public:
             // Get tile
             map::Tile& tile = map.get_tile(coord);
 
-            // Deal damage
+            // Deal damage and set status effect
             if(observer_ptr<GameObject> object = tile.get_contained_object()) {
                 object->take_damage<damage_types::DamageType::Fire>(potency_);
+                object->set_status<effects::Burning>(effects::Burning());
             }
+
 
             // Set surface
             tile.collide_with_surface(std::make_unique<surfaces::Fire>());

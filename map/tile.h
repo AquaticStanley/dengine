@@ -64,8 +64,12 @@ public:
         }
     }
 
-    observer_ptr<GameObject> get_contained_object() {
+    observer_ptr<GameObject>& get_contained_object() {
         return object_;
+    }
+
+    void set_contained_object(GameObject& object) {
+        object_ = &object;
     }
 
     std::string to_str() const {

@@ -20,6 +20,11 @@ public:
             // Get tile
             map::Tile& tile = map.get_tile(coord);
 
+            // Set status effect
+            if(observer_ptr<GameObject> object = tile.get_contained_object()) {
+                object->set_status<effects::Wet>(effects::Wet());
+            }
+
             // Set surface
             tile.collide_with_surface(std::make_unique<surfaces::Water>());
         }

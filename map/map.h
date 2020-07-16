@@ -19,7 +19,7 @@ public:
 
     bool move_object_from_to(const sf::Vector2i& origin, const sf::Vector2i& destination) {
         observer_ptr<GameObject> origin_object = get_tile(origin).get_contained_object();
-        if(auto dest_object = get_tile(destination).get_contained_object(); dest_object == nullptr) {
+        if(auto& dest_object = get_tile(destination).get_contained_object(); dest_object == nullptr) {
             dest_object = origin_object;
             origin_object = nullptr;
             return true;
