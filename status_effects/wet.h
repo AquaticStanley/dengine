@@ -10,6 +10,8 @@ public:
     void apply_status_effect(GameObject& object);
 
     void tick(GameObject& object) { (void)object; }
+
+    std::string to_str() const { return "Wet"; }
 };
 
 }

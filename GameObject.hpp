@@ -45,3 +45,11 @@ void GameObject::trigger_status_effect() {
         }
     }
 }
+
+template <class StatusEffect>
+void GameObject::output_status_effect() {
+    auto& status_effect = std::get<std::optional<StatusEffect>>(status_effects_);
+    if(status_effect.has_value()) {
+        std::cout << status_effect->to_str() << std::endl;
+    }
+}

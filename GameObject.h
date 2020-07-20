@@ -29,6 +29,8 @@ public:
 
     void trigger_status_effects();
 
+    void output_status_effects();
+
 public:
     // Debugging
     int hp() const { return hp_; }
@@ -41,6 +43,9 @@ public:
 private:
     template <class StatusEffect>
     void trigger_status_effect();
+
+    template <class StatusEffect>
+    void output_status_effect();
 
 private:
     int hp_;

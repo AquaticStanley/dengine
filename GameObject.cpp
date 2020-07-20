@@ -5,3 +5,9 @@ void GameObject::trigger_status_effects() {
         (..., trigger_status_effect<typename std::decay<decltype(status_effect)>::type::value_type>());
     }, status_effects_);
 }
+
+void GameObject::output_status_effects() {
+    std::apply([this](auto& ...status_effect) {
+        (..., output_status_effect<typename std::decay<decltype(status_effect)>::type::value_type>());
+    }, status_effects_);
+}

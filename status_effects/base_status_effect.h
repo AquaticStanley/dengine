@@ -54,6 +54,8 @@ public:
     // Debugging
     int potency() const { return potency_; }
 
+    std::string to_str() const { return static_cast<Derived*>(this)->to_str(); }
+
 protected:
     uint16_t duration_;
     int potency_;
