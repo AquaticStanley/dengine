@@ -11,7 +11,8 @@
 #include "abilities/poison_bomb.h"
 
 int main() {
-    GameObject object(200);
+    data::GameObjectData data(200, 3, "Troop A");
+    GameObject object(data);
 
     abilities::Fireball fireball(20);
     abilities::Rain rain;

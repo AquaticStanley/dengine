@@ -5,8 +5,8 @@
 template <damage_types::DamageType type>
 void GameObject::take_damage(int damage) {
     // Look up resistance, and decrease damage by that amount
-    damage -= (damage * (resistances_[type] / 100.0));
-    hp_ -= damage;
+    damage -= (damage * (data_.resistances_[type] / 100.0));
+    data_.hp_ -= damage;
 }
 
 template <class StatusEffect>

@@ -4,6 +4,7 @@
 #include <tuple>
 #include <unordered_map>
 #include <type_traits>
+#include "GameObjectData.h"
 #include "status_effects/status_effects.h"
 #include "damage_types.h"
 #include <iostream>
@@ -15,9 +16,8 @@ public:
     template <class... StatusEffects>
     using StatusEffects = std::tuple<std::optional<StatusEffects>...>;
 public:
-    GameObject(int hp, const Resistances& resistances = Resistances())
-    : hp_(hp)
-    , resistances_(resistances)
+    GameObject(const data::GameObjectData& data)
+    : data_(data)
     {}
 
 public:
@@ -33,7 +33,7 @@ public:
 
 public:
     // Debugging
-    int hp() const { return hp_; }
+    int hp() const { return data_.hp_; }
 
     template <class StatusEffect>
     std::optional<StatusEffect>& get_status_effect() {
@@ -48,9 +48,8 @@ private:
     void output_status_effect();
 
 private:
-    int hp_;
+    data::GameObjectData data_;
     StatusEffects<effects::Burning, effects::Wet, effects::Poison> status_effects_;
-    Resistances resistances_;
 };
 
 #include "GameObject.hpp"
