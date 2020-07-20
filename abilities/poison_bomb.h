@@ -6,8 +6,8 @@ namespace abilities {
 
 class PoisonBomb : public AbstractAbility {
 public:
-    PoisonBomb()
-    : AbstractAbility(100, 0, 5, 2, 5)
+    PoisonBomb(int potency)
+    : AbstractAbility(potency, 0, 5, 2, 5)
     {}
 
     virtual void apply_ability_effect(map::Map& map, const sf::Vector2i& origin, const sf::Vector2i& destination) {
@@ -25,7 +25,7 @@ public:
             }
 
             // Set surface
-            tile.collide_with_surface(std::make_unique<surfaces::Poison>());
+            tile.collide_with_surface(std::make_unique<surfaces::Poison>(potency_));
         }
     }
 };

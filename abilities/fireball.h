@@ -6,8 +6,8 @@ namespace abilities {
 
 class Fireball : public AbstractAbility {
 public:
-    Fireball()
-    : AbstractAbility(100,0,5,3,5)
+    Fireball(int potency)
+    : AbstractAbility(potency, 0, 5, 3, 5)
     {}
 
     virtual void apply_ability_effect(map::Map& map, const sf::Vector2i& origin, const sf::Vector2i& destination) {
@@ -26,7 +26,7 @@ public:
 
 
             // Set surface
-            tile.collide_with_surface(std::make_unique<surfaces::Fire>());
+            tile.collide_with_surface(std::make_unique<surfaces::Fire>(potency_));
         }
     }
 };
