@@ -61,10 +61,11 @@ public:
                     complete_coordinates.emplace(coordinate);
 
                     // Remove this coordinate from the test map
-                    coordinates_to_test.remove(coordinate);
+                    coordinates_to_test.erase(coordinate);
                 }
             }
         }
+        return complete_coordinates;
     }
 
     bool move_object_from_to(const sf::Vector2i& origin, const sf::Vector2i& destination) {
