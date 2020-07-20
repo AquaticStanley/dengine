@@ -32,6 +32,11 @@ void GameObject::set_status(StatusEffect effect) {
                 wet = effect;
             }
         }
+    } else if constexpr(std::is_same<StatusEffect, effects::Poison>::value) {
+        auto& poison = std::get<std::optional<effects::Poison>>(status_effects_);
+        if(!poison || (*poison) < effect) {
+            poison = effect;
+        }
     }
 }
 

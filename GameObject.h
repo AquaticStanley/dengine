@@ -49,7 +49,7 @@ private:
 
 private:
     int hp_;
-    StatusEffects<effects::Burning, effects::Wet> status_effects_;
+    StatusEffects<effects::Burning, effects::Wet, effects::Poison> status_effects_;
     Resistances resistances_;
 };
 

@@ -43,6 +43,14 @@ public:
                 surface_ = std::make_unique<surfaces::NormalSurface>();
                 break;
 
+            case surfaces::SurfaceType::Poison:
+                //Explode
+                if(object_) {
+                    object_->set_status<effects::Burning>(effects::Burning());
+                    object_->take_damage<damage_types::DamageType::Explosion>(surface_->potency() + rhs->potency());
+                }
+                break;
+
             default:
                 break;
             }
@@ -59,6 +67,20 @@ public:
             }
             break;
 
+        case surfaces::SurfaceType::Poison:
+            switch(rhs_surface_type) {
+            case surfaces::SurfaceType::Fire:
+                // Explode
+                if(object_) {
+                    object_->set_status<effects::Burning>(effects::Burning());
+                    object_->take_damage<damage_types::DamageType::Explosion>(surface_->potency() + rhs->potency());
+                }
+                surface_.swap(rhs);
+                break;
+
+            default:
+                break;
+            }
         default:
             break;
         }
@@ -82,6 +104,9 @@ public:
             break;
         case surfaces::SurfaceType::Normal:
             return ".";
+            break;
+        case surfaces::SurfaceType::Poison:
+            return "P";
             break;
         default:
             return "%";

@@ -3,8 +3,11 @@
 namespace damage_types {
 
     enum class DamageType {
+        Physical,
         Fire,
-        Water
+        Water,
+        Poison,
+        Explosion
     };
 
     template <class... Types>

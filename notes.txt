@@ -13,6 +13,10 @@ numb
 mad
 stunned (electricity)
 metal
+evading
+
+surface ideas:
+frozen
 
 
 some status effects need context of the world. therefore, two rounds will be done per turn:

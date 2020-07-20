@@ -9,7 +9,8 @@ namespace surfaces {
 enum class SurfaceType {
     Normal,
     Fire,
-    Water
+    Water,
+    Poison
 };
 
 class AbstractSurface {
