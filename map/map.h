@@ -12,6 +12,7 @@ public:
     template <class T>
     using observer_ptr = T*;
 
+    using coordinate_map = std::unordered_map<sf::Vector2i, int, helpers::hash_vector>;
     using coordinate_set = std::unordered_set<sf::Vector2i, helpers::hash_vector>;
 public:
     Map(const sf::Vector2i& dimensions)
@@ -21,11 +22,48 @@ public:
     {}
 
     coordinate_set get_object_move_tiles(const sf::Vector2i& object_coordinates) {
-        coordinate_set coordinates;
+        coordinate_set complete_coordinates;
+        coordinate_map coordinates_to_test;
         if(auto& object = get_tile(object_coordinates).get_contained_object()) {
             int remaining_movement = object->get_remaining_movement();
+            coordinates_to_test[object_coordinates] = remaining_movement;
 
-            // Get the tiles that this object can travel to
+            while(!coordinates_to_test.empty()) {
+                // Get the tiles that this object can travel to
+                for(auto& [coordinate, remaining_movement] : coordinates_to_test) {
+                    // Get tiles on all sides of this that we can move into and move them into test coords
+                    if(auto up_coord = coordinate + sf::Vector2i{0, 1}; tile_exists(up_coord)) {
+                        auto& tile = get_tile(up_coord);
+                        if(tile.movement_penalty() <= remaining_movement) {
+                            coordinates_to_test[up_coord] = remaining_movement - tile.movement_penalty();
+                        }
+                    }
+                    if(auto right_coord = coordinate + sf::Vector2i{1, 0}; tile_exists(right_coord)) {
+                        auto& tile = get_tile(right_coord);
+                        if(tile.movement_penalty() <= remaining_movement) {
+                            coordinates_to_test[right_coord] = remaining_movement - tile.movement_penalty();
+                        }
+                    }
+                    if(auto down_coord = coordinate + sf::Vector2i{0, -1}; tile_exists(down_coord)) {
+                        auto& tile = get_tile(down_coord);
+                        if(tile.movement_penalty() <= remaining_movement) {
+                            coordinates_to_test[down_coord] = remaining_movement - tile.movement_penalty();
+                        }
+                    }
+                    if(auto left_coord = coordinate + sf::Vector2i{-1, 0}; tile_exists(left_coord)) {
+                        auto& tile = get_tile(left_coord);
+                        if(tile.movement_penalty() <= remaining_movement) {
+                            coordinates_to_test[left_coord] = remaining_movement - tile.movement_penalty();
+                        }
+                    }
+
+                    // Move this coordinate into the master
+                    complete_coordinates.emplace(coordinate);
+
+                    // Remove this coordinate from the test map
+                    coordinates_to_test.remove(coordinate);
+                }
+            }
         }
     }
 

@@ -115,6 +115,10 @@ public:
         }
     }
 
+    int movement_penalty() const {
+        return surface_->movement_penalty();
+    }
+
 private:
     observer_ptr<GameObject> object_;
     std::unique_ptr<surfaces::AbstractSurface> surface_;

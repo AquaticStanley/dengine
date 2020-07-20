@@ -22,6 +22,7 @@ public:
 
     uint16_t duration() const { return duration_; }
     int potency() const { return potency_; }
+    int movement_penalty() const { return movement_penalty_; }
 protected:
     uint16_t duration_;             // How many turns this surface lasts
     int potency_;                   // Potency
