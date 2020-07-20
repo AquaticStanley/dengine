@@ -11,3 +11,11 @@ void GameObject::output_status_effects() {
         (..., output_status_effect<typename std::decay<decltype(status_effect)>::type::value_type>());
     }, status_effects_);
 }
+
+int GameObject::get_remaining_movement() const {
+    return data_.remaining_movement_;
+}
+
+void GameObject::reduce_remaining_movement_by(int reduce) {
+    data_.remaining_movement_ -= reduce;
+}

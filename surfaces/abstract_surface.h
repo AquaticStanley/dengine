@@ -15,7 +15,7 @@ enum class SurfaceType {
 
 class AbstractSurface {
 public:
-    AbstractSurface(int potency) : potency_(potency) {}
+    AbstractSurface(int potency, int movement_penalty = 1) : potency_(potency), movement_penalty_(movement_penalty) {}
     virtual ~AbstractSurface() {}
     virtual void apply_surface_effect(GameObject& object) = 0;  // Should set damage/healing and effect on object
     virtual SurfaceType surface_type() const = 0;
@@ -26,6 +26,7 @@ protected:
     uint16_t duration_;             // How many turns this surface lasts
     int potency_;                   // Potency
     int potency_change_rate_;       // How the potency changes from turn to turn
+    int movement_penalty_;          // How much movement it costs to move to this tile
 };
 
 }

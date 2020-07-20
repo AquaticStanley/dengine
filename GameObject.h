@@ -4,7 +4,7 @@
 #include <tuple>
 #include <unordered_map>
 #include <type_traits>
-#include "GameObjectData.h"
+#include "data/GameObjectData.h"
 #include "status_effects/status_effects.h"
 #include "damage_types.h"
 #include <iostream>
@@ -30,6 +30,10 @@ public:
     void trigger_status_effects();
 
     void output_status_effects();
+
+    int get_remaining_movement() const;
+
+    void reduce_remaining_movement_by(int reduce);
 
 public:
     // Debugging

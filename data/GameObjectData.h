@@ -1,7 +1,7 @@
 #pragma once
 
 #include <string>
-#include "damage_types.h"
+#include "../damage_types.h"
 
 namespace data {
 
@@ -13,12 +13,14 @@ public:
     GameObjectData(int hp, int movement, std::string name, const Resistances& resistances = Resistances())
     : hp_(hp)
     , movement_(movement)
+    , remaining_movement_(movement)
     , name_(name)
     , resistances_(resistances)
     {}
 
     int hp_;
     int movement_;
+    int remaining_movement_;
     std::string name_;
     Resistances resistances_;
 };

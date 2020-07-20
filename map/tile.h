@@ -12,6 +12,7 @@ public:
     using observer_ptr = T*;
 public:
     Tile() : object_(nullptr), surface_(std::make_unique<surfaces::NormalSurface>()) {}
+
     void collide_with_surface(std::unique_ptr<surfaces::AbstractSurface> rhs) {
         auto this_surface_type = surface_->surface_type();
         auto rhs_surface_type = rhs->surface_type();
