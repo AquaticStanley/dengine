@@ -16,7 +16,7 @@ metal
 evading
 
 surface ideas:
-frozen
+frozen - makes you have to move two consecutive squares at a time
 
 
 some status effects need context of the world. therefore, two rounds will be done per turn:
