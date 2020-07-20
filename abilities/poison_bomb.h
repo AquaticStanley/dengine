@@ -21,7 +21,7 @@ public:
             // Deal damage and set status effect
             if(observer_ptr<GameObject> object = tile.get_contained_object()) {
                 object->take_damage<damage_types::DamageType::Poison>(potency_);
-                object->set_status<effects::Poison>(effects::Poison());
+                object->set_status<effects::Poison>(effects::Poison(potency_/2));
             }
 
             // Set surface

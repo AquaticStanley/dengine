@@ -15,7 +15,6 @@ enum class SurfaceType {
 
 class AbstractSurface {
 public:
-    AbstractSurface() : potency_(0) {}
     AbstractSurface(int potency) : potency_(potency) {}
     virtual ~AbstractSurface() {}
     virtual void apply_surface_effect(GameObject& object) = 0;  // Should set damage/healing and effect on object

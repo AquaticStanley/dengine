@@ -46,7 +46,7 @@ public:
             case surfaces::SurfaceType::Poison:
                 //Explode
                 if(object_) {
-                    object_->set_status<effects::Burning>(effects::Burning());
+                    object_->set_status<effects::Burning>(effects::Burning(surface_->potency()));
                     object_->take_damage<damage_types::DamageType::Explosion>(surface_->potency() + rhs->potency());
                 }
                 break;
@@ -72,7 +72,7 @@ public:
             case surfaces::SurfaceType::Fire:
                 // Explode
                 if(object_) {
-                    object_->set_status<effects::Burning>(effects::Burning());
+                    object_->set_status<effects::Burning>(effects::Burning(rhs->potency()));
                     object_->take_damage<damage_types::DamageType::Explosion>(surface_->potency() + rhs->potency());
                 }
                 surface_.swap(rhs);

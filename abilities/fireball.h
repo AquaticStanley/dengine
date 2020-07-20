@@ -21,7 +21,7 @@ public:
             // Deal damage and set status effect
             if(observer_ptr<GameObject> object = tile.get_contained_object()) {
                 object->take_damage<damage_types::DamageType::Fire>(potency_);
-                object->set_status<effects::Burning>(effects::Burning());
+                object->set_status<effects::Burning>(effects::Burning(potency_/4));
             }
 
 

@@ -8,7 +8,7 @@ namespace effects {
 
 class Poison : public BaseStatusEffect<Poison> {
 public:
-    Poison() : BaseStatusEffect<Poison>(1, 100, 0) {}
+    Poison(int potency) : BaseStatusEffect<Poison>(3, potency, potency/-3) {}
     void apply_status_effect(GameObject& object);
 
     void tick(GameObject& object);
