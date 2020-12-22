@@ -4,6 +4,7 @@
 #include <memory>
 #include "tile.h"
 #include "../sf_helpers.h"
+#include <iostream>
 
 namespace map {
 
@@ -25,35 +26,63 @@ public:
         coordinate_set complete_coordinates;
         coordinate_map coordinates_to_test;
         if(auto& object = get_tile(object_coordinates).get_contained_object()) {
-            int remaining_movement = object->get_remaining_movement();
-            coordinates_to_test[object_coordinates] = remaining_movement;
+            int starting_remaining_movement = object->get_remaining_movement();
+            coordinates_to_test[object_coordinates] = starting_remaining_movement;
 
+            int iterations = 0;
             while(!coordinates_to_test.empty()) {
+                ++iterations;
+                std::cout << "iteration " << iterations << std::endl;
                 // Get the tiles that this object can travel to
                 for(auto& [coordinate, remaining_movement] : coordinates_to_test) {
+                    std::cout << "Got here - coordinate " << coordinate.x << "," << coordinate.y << "Remaining movement " << remaining_movement << std::endl;
                     // Get tiles on all sides of this that we can move into and move them into test coords
                     if(auto up_coord = coordinate + sf::Vector2i{0, 1}; tile_exists(up_coord)) {
                         auto& tile = get_tile(up_coord);
-                        if(tile.movement_penalty() <= remaining_movement) {
-                            coordinates_to_test[up_coord] = remaining_movement - tile.movement_penalty();
+                        if(tile.movement_penalty() <= remaining_movement && remaining_movement - tile.movement_penalty() >= 0) {
+                            if(auto coord = coordinates_to_test.find(up_coord); coord != coordinates_to_test.end()) {
+                                if(coordinates_to_test[up_coord] < remaining_movement) {
+                                    coordinates_to_test[up_coord] = remaining_movement - tile.movement_penalty();
+                                }
+                            } else {
+                                coordinates_to_test[up_coord] = remaining_movement - tile.movement_penalty();
+                            }
                         }
                     }
                     if(auto right_coord = coordinate + sf::Vector2i{1, 0}; tile_exists(right_coord)) {
                         auto& tile = get_tile(right_coord);
-                        if(tile.movement_penalty() <= remaining_movement) {
-                            coordinates_to_test[right_coord] = remaining_movement - tile.movement_penalty();
+                        if(tile.movement_penalty() <= remaining_movement && remaining_movement - tile.movement_penalty() >= 0) {
+                            if(auto coord = coordinates_to_test.find(right_coord); coord != coordinates_to_test.end()) {
+                                if(coordinates_to_test[right_coord] < remaining_movement) {
+                                    coordinates_to_test[right_coord] = remaining_movement - tile.movement_penalty();
+                                }
+                            } else {
+                                coordinates_to_test[right_coord] = remaining_movement - tile.movement_penalty();
+                            }
                         }
                     }
                     if(auto down_coord = coordinate + sf::Vector2i{0, -1}; tile_exists(down_coord)) {
                         auto& tile = get_tile(down_coord);
-                        if(tile.movement_penalty() <= remaining_movement) {
-                            coordinates_to_test[down_coord] = remaining_movement - tile.movement_penalty();
+                        if(tile.movement_penalty() <= remaining_movement && remaining_movement - tile.movement_penalty() >= 0) {
+                            if(auto coord = coordinates_to_test.find(down_coord); coord != coordinates_to_test.end()) {
+                                if(coordinates_to_test[down_coord] < remaining_movement) {
+                                    coordinates_to_test[down_coord] = remaining_movement - tile.movement_penalty();
+                                }
+                            } else {
+                                coordinates_to_test[down_coord] = remaining_movement - tile.movement_penalty();
+                            }
                         }
                     }
                     if(auto left_coord = coordinate + sf::Vector2i{-1, 0}; tile_exists(left_coord)) {
                         auto& tile = get_tile(left_coord);
-                        if(tile.movement_penalty() <= remaining_movement) {
-                            coordinates_to_test[left_coord] = remaining_movement - tile.movement_penalty();
+                        if(tile.movement_penalty() <= remaining_movement && remaining_movement - tile.movement_penalty() >= 0) {
+                            if(auto coord = coordinates_to_test.find(left_coord); coord != coordinates_to_test.end()) {
+                                if(coordinates_to_test[left_coord] < remaining_movement) {
+                                    coordinates_to_test[left_coord] = remaining_movement - tile.movement_penalty();
+                                }
+                            } else {
+                                coordinates_to_test[left_coord] = remaining_movement - tile.movement_penalty();
+                            }
                         }
                     }
 
@@ -62,6 +91,8 @@ public:
 
                     // Remove this coordinate from the test map
                     coordinates_to_test.erase(coordinate);
+
+                    break;
                 }
             }
         }
