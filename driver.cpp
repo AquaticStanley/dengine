@@ -20,7 +20,6 @@ int main() {
 
     map::Map game_map(sf::Vector2i{8,8});
     game_map.get_tile(sf::Vector2i{2,2}).set_contained_object(object);
-    // game_map.move_object_from_to(sf::Vector2i{0,0}, sf::Vector2i{2,2});
     std::cout << game_map.to_str() << std::endl;
     std::cout << "GameObject hp - " << object.hp() << std::endl;
 
@@ -42,12 +41,22 @@ int main() {
     std::cout << "GameObject hp - " << object.hp() << std::endl;
     object.output_status_effects();
 
+    std::cout << "Sending rain with size 3 to position 2,4" << std::endl;
+    abilities::Rain rain2(3);
+    rain2.apply_ability_effect(game_map, sf::Vector2i{0,0}, sf::Vector2i{2,4});
+    std::cout << game_map.to_str() << std::endl;
+    std::cout << "GameObject hp - " << object.hp() << std::endl;
+    object.output_status_effects();
+
     auto& go = game_map.get_tile(sf::Vector2i{2,2}).get_contained_object();
     std::cout << go->get_remaining_movement() << std::endl;
+    game_map.move_object_from_to(sf::Vector2i{2,2}, sf::Vector2i{3,4});
+    auto& go2 = game_map.get_tile(sf::Vector2i{3,4}).get_contained_object();
+    std::cout << "GameObject hp after moving - " << go2->hp() << std::endl;
 
     std::unordered_set<sf::Vector2i, helpers::hash_vector> move_coords = game_map.get_object_move_tiles(sf::Vector2i{2,2});
 
-    for(auto& vec : move_coords) {
-        std::cout << "(" << vec.x << ", " << vec.y << ")" << std::endl;
-    }
+    // for(auto& vec : move_coords) {
+    //     std::cout << "(" << vec.x << ", " << vec.y << ")" << std::endl;
+    // }
 }

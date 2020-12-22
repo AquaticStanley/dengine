@@ -7,8 +7,8 @@ namespace abilities {
 
 class Rain : public AbstractAbility {
 public:
-    Rain()
-    : AbstractAbility(0, 0, 5, 2, 5)
+    Rain(int size = 2)
+    : AbstractAbility(0, 0, 5, size, 5)
     {}
 
     virtual void apply_ability_effect(map::Map& map, const sf::Vector2i& origin, const sf::Vector2i& destination) {

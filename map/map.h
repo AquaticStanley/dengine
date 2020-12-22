@@ -29,13 +29,9 @@ public:
             int starting_remaining_movement = object->get_remaining_movement();
             coordinates_to_test[object_coordinates] = starting_remaining_movement;
 
-            int iterations = 0;
             while(!coordinates_to_test.empty()) {
-                ++iterations;
-                std::cout << "iteration " << iterations << std::endl;
                 // Get the tiles that this object can travel to
                 for(auto& [coordinate, remaining_movement] : coordinates_to_test) {
-                    std::cout << "Got here - coordinate " << coordinate.x << "," << coordinate.y << "Remaining movement " << remaining_movement << std::endl;
                     // Get tiles on all sides of this that we can move into and move them into test coords
                     if(auto up_coord = coordinate + sf::Vector2i{0, 1}; tile_exists(up_coord)) {
                         auto& tile = get_tile(up_coord);
